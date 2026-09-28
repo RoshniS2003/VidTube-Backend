@@ -9,7 +9,6 @@ const connectDB = async () => {
 
         // mongoose give a return object
         const connectionInstance = await mongoose.connect(`${process.env.MONGODB_URL}/${DB_Name}`);
-
         console.log(`MongoBD Connected !! DB HOST: 
             ${connectionInstance.connection.host}`);
 
@@ -21,5 +20,6 @@ const connectDB = async () => {
 };
 
 export default connectDB;
-
+/* export default connectDB is used to export the connectDB function so that 
+ we can import and use it in another file.  */
 

@@ -1,12 +1,25 @@
-# Shiksha-backend
+# VidTube - YouTube Clone Backend 🎥
 
-This is my Node.js Backend Project
+A complete backend for a video sharing platform like YouTube.
 
-## How to run:
+## 🚀 Tech Stack
+- Node.js
+- Express.js
+- MongoDB & Mongoose
+- JWT Authentication
+- Cloudinary (for video upload)
+- Multer
 
-1. npm install
-2. npm start
+## ✨ Features
+- User Authentication (Register, Login)
+- Video Upload, Update, Delete
+- Like, Comment, Subscribe functionality
+- Watch History & Playlists
+- Search & Filter Videos
 
-Server http://localhost:3000 will run
+## 🔗 Frontend
+Coming soon with React.js
+
+Server http://localhost:8000 will run
 
 Author : Roshni Sahu
