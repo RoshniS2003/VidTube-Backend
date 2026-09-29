@@ -1,6 +1,6 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose from "mongoose";
+import bcrypt from "bcrypt";  // Used for Password Hashing
 import jwt from "jsonwebtoken";  // Used for Token :Login ke baad user ko identify karne ke liye
-import bcrypt from "bcrypt";  // Used for Password
 
 const userSchema = new mongoose.Schema(
     {
@@ -51,7 +51,7 @@ const userSchema = new mongoose.Schema(
     }
 )
 
-// Authentication :----->>>
+// Authentication :----->>> Need JWT
 
 // pre("save")
 // pre("save" , function () {})
@@ -86,23 +86,24 @@ userSchema.methods.isPasswordCorrect = async function (password) {
     //   // If we compare the password then its return in true or false value
 }
 
+// Create Access Token
 userSchema.methods.generateAccessToken = function () {
-    jwt.sign(
+    return jwt.sign(
         {
             _id: this._id,
             email: this.email,
             username: this.username,
             fullName: this.fullName
         },
-        process.env.ACCESS_TOKEN_SECRET,
+        process.env.ACCESS_TOKEN_SECRET,  // secret key hai jisse JWT sign hota hai.
         // object
         {
-            expiresIn: process.env.ACCESS_TOKEN_EXPIRY
+            expiresIn: process.env.ACCESS_TOKEN_EXPIRY   // batata hai token kitne time tak valid rahega.
         }
     )
 }
 userSchema.methods.generateRefreshToken = function () {
-    jwt.sign(
+    return jwt.sign(
         {
             _id: this._id
         },
@@ -111,7 +112,10 @@ userSchema.methods.generateRefreshToken = function () {
         {
             expiresIn: process.env.REFRESH_TOKEN_EXPIRY
         }
-    )
-}
+    );
+};
+
+// Access Token  → Short-term access
+// Refresh Token → Naya access token lene ke liye
 
 export const User = mongoose.model("User", userSchema)
