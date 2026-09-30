@@ -16,8 +16,8 @@ connectDB() // execution
 
     .then(() => {
         // Error Listen
-        app.on("error" , (error) => {
-            console.log("Error:" , error);
+        app.on("error", (error) => {
+            console.log("Error:", error);
             throw err
         })
 
@@ -31,13 +31,6 @@ connectDB() // execution
     .catch((err) => {
         console.log("MongoDB Connection Failed !!! ", err);
     })
-
-
-
-
-
-
-
 
 /*
 import mongoose from "mongoose";

@@ -36,7 +36,6 @@ app.use(express.urlencoded({extended: true, limit: "16kb"}))  //form data read k
 app.use(express.static("public")) // public folder ki files browser ko serve/send karne ke liye.
 app.use(cookieParser())
 
-
-
 export { app }
 // export { app }
+
