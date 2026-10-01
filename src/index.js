@@ -2,7 +2,7 @@
 
 import dotenv from "dotenv";  //.env(dotenv) file ki values ko process.env mein load karta hai.
 import connectDB from "./db/index.js";
-
+import { app } from "./app.js";  // index.js ko server start karne ke liye Express ka app chahiye.
 
 dotenv.config({  //config(): .env file ko read karta hai aur uski values ko process.env mein available kar deta hai.
     path: './.env'

@@ -26,15 +26,30 @@ const app = express()   // Create Express Application
 // If Middleware is used then we use : use keyword 
 // cors() — Frontend ko Backend se connect karne dena
 app.use(cors({
-    origin: process.env.CORS_ORIGIN,
-    credentials: true
+  origin: process.env.CORS_ORIGIN,
+  credentials: true
 }))
 
 // Work Same only Format Matter
-app.use(express.json({limit: "16kb"}))  // JSON data read karne ke liye & It means the maximum JSON request body size is 16 KB.
-app.use(express.urlencoded({extended: true, limit: "16kb"}))  //form data read karne ke liye.
+app.use(express.json({ limit: "16kb" }))  // JSON data read karne ke liye & It means the maximum JSON request body size is 16 KB.
+app.use(express.urlencoded({ extended: true, limit: "16kb" }))  //form data read karne ke liye.
 app.use(express.static("public")) // public folder ki files browser ko serve/send karne ke liye.
 app.use(cookieParser())
+
+// app.js = Main connection:------->>>>
+/* app.js -> Routes se connection -> user.routes.js -> Controller se connection 
+-> user.controllers.js -> Actual logic 
+
+app.js routes ko connect karta hai → routes decide karta hai kis URL par kaunsa 
+controller chalega → controller actual logic perform karta hai.*/
+
+// routes import
+import userRoute from './routes/user.routes.js'
+
+// routes declaration
+//   /users ke andar ke routes ko Express app mein connect karo
+app.use("/api/v1/users", userRoute)   // http://localhost:8000/api/v1/users/register(routes_call)
+// /users is a common prefix
 
 export { app }
 // export { app }

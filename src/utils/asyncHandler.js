@@ -10,10 +10,13 @@
 
  */
 
+// controller mein baar-baar try-catch na likhna pade isliye asyncHandler usr karte
+// Har bar controllers ke andar try-catch likhna na pade repetitive kam na karna padega isliye ham asyncHandler banaya 
+//  Async controller mein error aaye to automatically next(err) ko bhej do.
 const asyncHandler = (requestHandler) => {
-   (req, res , next) => {
-       Promise.resolve(requestHandler(req, res , next)).
-       catch((err) => next(err))  // catch means reject
+   return (req, res , next) => {
+       Promise.resolve(requestHandler(req, res , next))
+       .catch((err) => next(err))  // catch means reject
    }
 }
 

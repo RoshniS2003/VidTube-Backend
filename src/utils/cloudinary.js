@@ -32,16 +32,17 @@ const uploadOnCloudinary = async (localFilePath) => {
         // file has been uploaded successfully
         console.log("File is uploaded on Cloudinary", response.url);
         return response;   // user ko pura response return de diye wo apne needs ke according use karega
-    
+
     } catch (error) {  // Agar Cloudinary upload mein error aa gaya:
-          fs.unlinkSync(localFilePath)  // Agar upload fail hua, to temporary file ko rakhne ka fayda nahi.
-          return null; // Upload successful nahi hua.
+        fs.unlinkSync(localFilePath)  // Agar upload fail hua, to temporary file ko rakhne ka fayda nahi.
+        return null; // Upload successful nahi hua.
     }
 }
 
-export {uploadOnCloudinary}
+export { uploadOnCloudinary }
 /* uploadOnCloudinary() function local file ko Cloudinary par upload karta hai, Cloudinary ka response 
  return karta hai, aur upload fail hone par local temporary file delete karta hai.  */
+
 
 
 
