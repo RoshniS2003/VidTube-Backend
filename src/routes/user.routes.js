@@ -3,10 +3,23 @@
 
 import { Router } from "express";   // 1
 import { registerUser } from "../controllers/user.controllers.js";   // 4 automatic import
+import { upload } from "../middlewares/multer.middleware.js"
 
 const router = Router(); // 2  // with the help of Router we create a router app
 
-router.route("/register").post(registerUser)   // 4  /register request aaye → registerUser controller ko bulao.
+router.route("/register").post(
+    upload.fields([
+        {
+            name: "avatar",
+            maxCount: 1
+        },
+        {
+           name: "coverImage",
+           maxCount: 1
+        }
+    ]),
+    registerUser
+)   // 4  /register request aaye → registerUser controller ko bulao.
 // router.post("/register", registerUser);    
 // /register is a route and registerUser is a methods
 /* GET = lena/read karna kyunki backend se data mangaya ja raha hai.
