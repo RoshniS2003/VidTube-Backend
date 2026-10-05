@@ -3,6 +3,7 @@ import { asyncHandler } from "../utils/asyncHandler.js";  // 1
 import { ApiError } from "../utils/ApiError.js"  // 6
 import { User } from "../models/user.model.js"   // 8
 import { uploadOnCloudinary } from "../utils/cloudinary.js"   // 10
+import { ApiResponse } from "../utils/ApiResponse.js"
 
 // User register karne ka actual logic yahan hoga.
 const registerUser = asyncHandler(async (req, res) => {  // 2
@@ -56,7 +57,7 @@ const registerUser = asyncHandler(async (req, res) => {  // 2
     }
 
     // 12
-    User.create({
+    const user = await User.create({
         fullName,
         avatar: avatar.url,
         coverImage: coverImage?.url || "",
@@ -64,6 +65,18 @@ const registerUser = asyncHandler(async (req, res) => {  // 2
         password,
         username: username.toLowerCase()
     })
+
+    const createdUser = await User.findById(user._id).select(
+        "-password -refreshToken"
+    )
+
+    if (!createdUser) {
+        throw new ApiError(500, "Something went wrong while registering the user")
+    }
+
+    return res.status(201).json(
+        new ApiResponse(200, createdUser, "User Register Successfully")
+    )
 })
 
 export { registerUser }  // 3
