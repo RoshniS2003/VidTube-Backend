@@ -7,8 +7,9 @@ import { upload } from "../middlewares/multer.middleware.js"
 
 const router = Router(); // 2  // with the help of Router we create a router app
 
+// router.route("/register").post(registerUser)
 router.route("/register").post(
-    upload.fields([
+    upload.fields([  // [] --->>> array
         {
             name: "avatar",
             maxCount: 1
